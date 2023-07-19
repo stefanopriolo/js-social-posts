@@ -111,16 +111,23 @@ posts.forEach((post, i) => {
   container.append(postCard);
 });
 
+const idList = [];
+
 function likeClick() {
   const id = this.getAttribute("data-postid");
   const likes = document.querySelector(`#like-counter-${id}`);
 
-  likes.innerHTML = parseInt(likes.innerHTML) + 1;
-}
+  if (idList.includes(id)) {
+    return;
+  }
 
-function colorClick() {}
+  likes.innerHTML = parseInt(likes.innerHTML) + 1;
+  this.classList.add("like-button--liked");
+
+  idList.push(id);
+}
 
 const buttons = document.querySelectorAll(".like-button");
 buttons.forEach((button, i) => {
-  button.addEventListener("click", likeClick, colorClick);
+  button.addEventListener("click", likeClick);
 });
